@@ -10,13 +10,6 @@ T_to_zero_gra = 0;
 T_land_moon = 0;
 delta_T = 1; % simulation time step (hour)
 
-%% Create figure
-figure(1); clf;
-fig = view(3);
-daspect([1 1 1]);
-grid("on")
-
-
 %% Stage1: Escape from earth 
 figure(1); clf;
 fig = view(3);
@@ -47,18 +40,28 @@ F_earth.Parent = h_synodic_earth;
 text_earth = text(R_earth,0,0,'Earth', 'FontSize', 10);
 text_earth.Parent = h_synodic_earth;
 
+%%%%%%%% Space craft frame %%%%%%%%%%
+x_space_craft = 0;
+y_space_craft = 0;
+z_space_craft = 0;
+
+%%
 for i=1:T_sim
     % Update date state of earth
     theta_synodic_earth = theta_synodic_earth + ang_vel_earth*delta_T;
-    T_synodic_earth = makehgtform('zrotate', theta_synodic_earth);
-    h_synodic_earth = hgtransform(Matrix=T_synodic_earth_0*T_synodic_earth);
-%     set(mesh_earth,'Parent',h_synodic_earth);
-    set(F_earth,'Parent',h_synodic_earth);
-    set(text_earth, 'Parent', h_synodic_earth);
-    pause(0.1)
+    update_rotation(theta_synodic_earth, h_synodic_earth, T_synodic_earth_0, ...
+        F_earth, text_earth, mesh_earth)
+    
+    % Update state of craft state
+    x_space_craft = x_space_craft + x_dot*delta_T;
+    y_space_craft = y_space_craft + y_dot*delta_T;
+    y_space_craft = z_space_craft + z_dot*delta_T;
+    
+
+
+    pause(0.05)
     drawnow
 end
-drawnow
 %% Stage3: Landing to the moon
 %%%%%%%%% MCI Frame (Moon) %%%%%%%%%%%%
 % [moon_x, moon_y, moon_z] = sphere(50); % Create a sphere for Moon
