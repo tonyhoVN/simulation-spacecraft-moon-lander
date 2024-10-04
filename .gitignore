@@ -1,2 +1,2 @@
+# Ignore all .asv files
 *.asv
-pycache
