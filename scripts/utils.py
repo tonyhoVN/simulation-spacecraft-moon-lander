@@ -24,13 +24,13 @@ def set_initial_position(phi, theta, radius, R_synodic_earth_0):
     x = radius * np.sin(phi) * np.cos(theta)
     y = radius * np.sin(phi) * np.sin(theta)
     z = radius * np.cos(phi)
-    # Transform using the provided transformation matrix
+    # Position
     position = np.dot(
         R_synodic_earth_0, np.array([x, y, z])
-    )  # initial launching position
+    ) 
     velocity = np.dot(
         R_synodic_earth_0, np.array([0, 0, 0])
-    )  # Initial unit velocity is zero
+    )
     thrust_unit_force = np.dot(R_synodic_earth_0, np.array([0, 0, 1]))
     return position, velocity, thrust_unit_force
 
