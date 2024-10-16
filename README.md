@@ -1,6 +1,10 @@
 # simulation-spacecraft-moon-lander
 Simulation the process travelling from Earth to land the Moon. 
 
+## Assumption 
+- Neglect the effect moon orbit. The synodic is inertial frame. 
+- Moon does not rotate around Earth
+
 
 # initial condition
 - The space ship should launch near xich dao to have the greatest tangent velocity
@@ -26,3 +30,5 @@ the initial mass and landing mass
 #
 after flying 2 hour -> increase velocity to 25000mph to exist earth orbit
  
+## Boundary condition
+If spacecraft is close to surface and velocity toward surface -> only tangent velocity
